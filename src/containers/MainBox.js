@@ -4,6 +4,23 @@ import { Profile, Photos, Cocktails, Pokemon} from '../components/Pages.js'
 
 class MainBox extends React.Component {
 
+  state = {
+    page:''
+  }
+
+  handleClick = (e) => {
+    console.log(e.target.id)
+    this.setState({
+      page:e.target.id
+    })
+  }
+
+  toDisplay = {
+    'profile':<Profile />,
+    'photo': <Photos />,
+    'cocktail': <Cocktails /> ,
+    'pokemon':<Pokemon />
+  }
 
   render() {
 
@@ -17,8 +34,8 @@ class MainBox extends React.Component {
 
     return (
       <div>
-        <MenuBar />
-        {detailsToDisplay}
+        <MenuBar handleClick={this.handleClick} active={this.state.page}/>
+        {this.toDisplay[this.state.page]}
       </div>
     )
   }
